@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Result - Smart Result</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+<header class="bg-blue-700 text-white px-8 py-4 flex items-center">
+  <button
+          class="bg-white text-blue-700 px-4 py-2 rounded hover:bg-gray-100 transition mr-6">
+    &larr; <a th:href="@{'/'}"> Back </a>
+  </button>
+  <h1 class="text-2xl font-bold  text-center">Add Result for Student</h1>
+</header>
+<div  class="max-w-3xl mx-auto mt-12 bg-white p-10 rounded-lg shadow-md">
+
+
+  <form th:action="@{'/result/processForm'}" th:object="${FormStudent}" method="POST" class="space-y-6">
+
+          <!-- Student Info -->
+          <div class="grid md:grid-cols-2 gap-6">
+            <input type="text" placeholder="Student Name" th:field="*{name}" required class="border px-4 py-2 rounded w-full" />
+            <input type="text" placeholder="Roll Number" th:field="*{rollNumber}" required class="border px-4 py-2 rounded w-full" />
+            <input type="email" name="email" placeholder="Email" th:field="*{email}" required class="border px-4 py-2 rounded w-full" />
+            <input type="text" name="grade" placeholder="Grade" th:field="*{grade}" required class="border px-4 py-2 rounded w-full" />
+            <input type="date" name="dateOfBirth" placeholder="Date of Birth" th:field="*{dateOfBirth}" required class="border px-4 py-2 rounded w-full" />
+            <select name="gender" required th:field="*{gender}" class="border px-4 py-2 rounded w-full">
+              <option value="">Select Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+            <textarea name="address" placeholder="Address" th:field="*{address}" required class="border px-4 py-2 rounded w-full md:col-span-2"></textarea>
+          </div>
+
+
+          <hr class="my-4">
+
+          <!-- Subjects -->
+          <h2 class="text-xl font-semibold">Enter Marks for 4 Subjects</h2>
+
+          <div class="space-y-4">
+            <!-- Subject 1 -->
+            <div class="grid md:grid-cols-5 gap-4">
+              <input type="text" name="subjects[0].subject" placeholder="Subject Name" required class="border px-4 py-2 rounded" />
+              <input type="number" name="subjects[0].marks" placeholder="Marks" required class="border px-4 py-2 rounded" />
+              <input type="number" name="subjects[0].maxMarks" placeholder="Max Marks" required class="border px-4 py-2 rounded" />
+              <input type="text" name="subjects[0].remarks" placeholder="Remarks" class="border px-4 py-2 rounded" />
+              <input type="text" name="subjects[0].gradeGpa" placeholder="GPA (e.g. A+)" maxlength="2" required class="border px-4 py-2 rounded" />
+            </div>
+
+            <!-- Subject 2 -->
+            <div class="grid md:grid-cols-5 gap-4">
+              <input type="text" name="subjects[1].subject" placeholder="Subject Name" required class="border px-4 py-2 rounded" />
+              <input type="number" name="subjects[1].marks" placeholder="Marks" required class="border px-4 py-2 rounded" />
+              <input type="number" name="subjects[1].maxMarks" placeholder="Max Marks" required class="border px-4 py-2 rounded" />
+              <input type="text" name="subjects[1].remarks" placeholder="Remarks" class="border px-4 py-2 rounded" />
+              <input type="text" name="subjects[1].gradeGpa" placeholder="GPA (e.g. A+)" maxlength="2" required class="border px-4 py-2 rounded" />
+            </div>
+
+<!--            &lt;!&ndash; Subject 3 &ndash;&gt;-->
+<!--            <div class="grid md:grid-cols-5 gap-4">-->
+<!--              <input type="text" name="subjects[2].subject" placeholder="Subject Name" required class="border px-4 py-2 rounded" />-->
+<!--              <input type="number" name="subjects[2].marks" placeholder="Marks" required class="border px-4 py-2 rounded" />-->
+<!--              <input type="number" name="subjects[2].maxMarks" placeholder="Max Marks" required class="border px-4 py-2 rounded" />-->
+<!--              <input type="text" name="subjects[2].remarks" placeholder="Remarks" class="border px-4 py-2 rounded" />-->
+<!--              <input type="text" name="subjects[2].gradeGpa" placeholder="GPA (e.g. A+)" maxlength="2" required class="border px-4 py-2 rounded" />-->
+<!--            </div>-->
+
+<!--            &lt;!&ndash; Subject 4 &ndash;&gt;-->
+<!--            <div class="grid md:grid-cols-5 gap-4">-->
+<!--              <input type="text" name="subjects[3].subject" placeholder="Subject Name" required class="border px-4 py-2 rounded" />-->
+<!--              <input type="number" name="subjects[3].marks" placeholder="Marks" required class="border px-4 py-2 rounded" />-->
+<!--              <input type="number" name="subjects[3].maxMarks" placeholder="Max Marks" required class="border px-4 py-2 rounded" />-->
+<!--              <input type="text" name="subjects[3].remarks" placeholder="Remarks" class="border px-4 py-2 rounded" />-->
+<!--              <input type="text" name="subjects[3].gradeGpa" placeholder="GPA (e.g. A+)" maxlength="2" required class="border px-4 py-2 rounded" />-->
+<!--            </div>-->
+          </div>
+
+
+          <button type="submit" class="bg-blue-700 text-white px-6 py-3 rounded-md font-semibold hover:bg-blue-800 transition">
+            Submit Result
+          </button>
+  </form>
+</div>
+
+</body>
+</html>

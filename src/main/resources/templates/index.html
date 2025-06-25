@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Smart Result</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-gray-800 font-sans">
+
+<!-- Header -->
+<header class="bg-blue-700 text-white px-8 py-4 flex justify-between items-center fixed top-0 w-full z-50 shadow-md">
+    <div class="text-2xl font-extrabold tracking-wide cursor-pointer" onclick="scrollToSection('home')">Smart Result</div>
+    <nav class="space-x-8 text-lg font-medium">
+        <a href="#home" class="hover:underline transition" onclick="scrollToSection('home')">Home</a>
+        <a href="#about" class="hover:underline transition" onclick="scrollToSection('about')">About</a>
+        <a href="#check-result" class="hover:underline transition" onclick="scrollToSection('check-result')">View Result</a>
+        <a th:href="@{'/result/addResult'}" class="hover:underline transition" onclick="scrollToSection('contact')">Add result</a>
+        <a href="#contact" class="hover:underline transition" onclick="scrollToSection('contact')">Contact</a>
+    </nav>
+</header>
+
+<main class="pt-20">
+
+    <!-- Hero Section -->
+    <section id="home" class="h-[50vh] flex flex-col justify-center items-center bg-gradient-to-r from-blue-600 to-indigo-700 text-white text-center px-6">
+        <h1 class="text-6xl font-extrabold mb-4 drop-shadow-lg">Smart Result</h1>
+        <p class="text-xl max-w-xl mb-8 drop-shadow-md">Instant, Accurate & Smart Academic Results at your fingertips.</p>
+        <div class="flex space-x-6">
+            <a href="#contact" class="bg-white text-blue-700 px-8 py-3 rounded-full font-semibold shadow-lg hover:bg-gray-100 transition">Get in Touch</a>
+            <a href="#check-result" class="bg-yellow-400 text-black px-8 py-3 rounded-full font-semibold shadow-lg hover:bg-yellow-300 transition">Check Result</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-8 bg-gray-50 text-center max-w-5xl mx-auto">
+        <h2 class="text-4xl font-bold mb-10">About Smart Result</h2>
+        <p class="text-lg leading-relaxed max-w-3xl mx-auto text-gray-700">
+            Smart Result is designed to provide real-time academic results with advanced analytics, secure access, and a user-friendly experience for students and educators alike. Our platform ensures accuracy, speed, and privacy.
+        </p>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-20 px-8 bg-white text-center max-w-6xl mx-auto">
+        <h2 class="text-4xl font-bold mb-14">Features</h2>
+        <div class="grid md:grid-cols-3 gap-12">
+            <div class="bg-blue-50 p-8 rounded-xl shadow hover:shadow-lg transition">
+                <h3 class="text-2xl font-semibold mb-3 text-blue-700">Real-Time Results</h3>
+                <p class="text-gray-700">Students get instant updates once results are published.</p>
+            </div>
+            <div class="bg-blue-50 p-8 rounded-xl shadow hover:shadow-lg transition">
+                <h3 class="text-2xl font-semibold mb-3 text-blue-700">Secure Access</h3>
+                <p class="text-gray-700">Only authorized users can access and view sensitive data securely.</p>
+            </div>
+            <div class="bg-blue-50 p-8 rounded-xl shadow hover:shadow-lg transition">
+                <h3 class="text-2xl font-semibold mb-3 text-blue-700">Smart Analytics</h3>
+                <p class="text-gray-700">Visual insights and performance tracking for students and teachers.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Check Result Section -->
+    <section id="check-result" class="py-20 px-8 text-center max-w-xl mx-auto rounded-xl shadow-lg">
+        <h2 class="text-3xl font-bold mb-8">Check Your Result</h2>
+        <form  th:action="@{'/result/viewResult'}" method="post" id="resultForm" class="space-y-6">
+            <input  name="rollNumber" type="text"  placeholder="Enter Roll Number"
+                   class="w-full border border-gray-300 px-5 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            <button  type="submit"
+                    class="bg-blue-700 text-white w-full py-3 rounded-md font-semibold hover:bg-blue-800 transition">Check Result</button>
+            <p id="formError" class="text-red-600 text-sm mt-2 hidden"></p>
+        </form>
+        <a th:href="@{'result/view'}" > View Result Test</a>
+
+    </section>
+
+
+</main>
+
+<!-- Footer -->
+<footer class="bg-gray-800 text-gray-300 text-center py-6 mt-20">
+    &copy; 2025 Smart Result. All rights reserved.
+</footer>
+
+<script>
+    // Smooth scroll helper (used by header links)
+    function scrollToSection(id) {
+        document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Validate Check Result form
+    function validateResultForm() {
+        const roll = document.getElementById('rollNumber').value.trim();
+        const error = document.getElementById('formError');
+        error.classList.add('hidden');
+
+        if (!roll) {
+            error.textContent = 'Roll Number is required.';
+            error.classList.remove('hidden');
+            return false;
+        }
+        if (!/^\d+$/.test(roll)) {
+            error.textContent = 'Roll Number must be numeric.';
+            error.classList.remove('hidden');
+            return false;
+        }
+        // Here you can add actual result fetching logic
+        alert('Checking result for Roll Number: ' + roll);
+        return false; // Prevent form submission for demo
+    }
+
+    // Validate Contact form
+    function validateContactForm() {
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const message = document.getElementById('message').value.trim();
+        const successMsg = document.getElementById('contactSuccess');
+        const errorMsg = document.getElementById('contactError');
+
+        successMsg.classList.add('hidden');
+        errorMsg.classList.add('hidden');
+
+        if (!name || !email || !message) {
+            errorMsg.textContent = 'Please fill all fields correctly.';
+            errorMsg.classList.remove('hidden');
+            return false;
+        }
+        // Simple email format check
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            errorMsg.textContent = 'Please enter a valid email.';
+            errorMsg.classList.remove('hidden');
+            return false;
+        }
+
+        // Simulate sending message
+        successMsg.classList.remove('hidden');
+        // Reset form
+        document.getElementById('contactForm').reset();
+
+        return false; // Prevent actual submission for demo
+    }
+</script>
+</body>
+</html>

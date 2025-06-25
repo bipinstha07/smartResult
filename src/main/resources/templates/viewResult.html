@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Marksheet - Smart Result</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800 font-sans">
+
+<!-- Header -->
+<header class="bg-blue-700 text-white px-8 py-4 flex items-center">
+    <button onclick="history.back()"
+            class="bg-white text-blue-700 px-4 py-2 rounded hover:bg-gray-100 transition mr-6">
+        &larr; Back
+    </button>
+    <h1 class="text-2xl font-bold text-center">View Result</h1>
+</header>
+
+<!-- Main Container -->
+<div class="max-w-4xl mx-auto mt-10 bg-white p-10 rounded-lg shadow-lg">
+
+    <!-- Title -->
+    <div class="text-center mb-10">
+        <h1 class="text-3xl font-bold text-blue-700">Smart Result</h1>
+        <p class="text-lg text-gray-600">Official Marksheet</p>
+    </div>
+
+    <!-- Student Info -->
+    <div class="grid md:grid-cols-2 gap-6 mb-10">
+        <p><strong>Name:</strong> <span th:text="${studentMarks.name}"></span></p>
+        <p><strong>Roll Number:</strong> <span th:text="${studentMarks.rollNumber}"></span></p>
+        <p><strong>Email:</strong> <span th:text="${studentMarks.email}"></span></p>
+        <p><strong>Grade:</strong> <span th:text="${studentMarks.grade}"></span></p>
+        <p><strong>Gender:</strong> <span th:text="${studentMarks.gender}"></span></p>
+        <p><strong>Date of Birth:</strong> <span th:text="${studentMarks.dateOfBirth}"></span></p>
+        <p class="md:col-span-2"><strong>Address:</strong> <span th:text="${studentMarks.address}"></span></p>
+    </div>
+
+    <!-- Marks Table -->
+    <div class="overflow-x-auto">
+        <table class="w-full border text-left text-sm">
+            <thead class="bg-blue-700 text-white">
+            <tr>
+                <th class="py-2 px-4">Subject</th>
+                <th class="py-2 px-4">Marks</th>
+                <th class="py-2 px-4">Full Marks</th>
+                <th class="py-2 px-4">GPA</th>
+                <th class="py-2 px-4">Remarks</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="mark : ${studentMarks.marks}" class="border-b">
+                <td class="py-2 px-4" th:text="${mark.subject}"></td>
+                <td class="py-2 px-4" th:text="${mark.marks}"></td>
+                <td class="py-2 px-4" th:text="${mark.maxMarks}"></td>
+                <td class="py-2 px-4" th:text="${mark.gradeGpa}"></td>
+                <td class="py-2 px-4" th:text="${mark.remarks}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
