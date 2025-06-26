@@ -42,21 +42,23 @@
           <h2 class="text-xl font-semibold">Enter Marks for Subjects</h2>
                     <div class="space-y-4" id="container">
                       <!-- Subject 1 -->
-                      <div class="grid md:grid-cols-5 gap-4">
+                      <div class="grid md:grid-cols-6 gap-4" id="index-1">
                         <input type="text" name="subjects[0].subject" placeholder="Subject Name" required class="border px-4 py-2 rounded" />
                         <input type="number" name="subjects[0].marks" placeholder="Marks" required class="border px-4 py-2 rounded" />
                         <input type="number" name="subjects[0].maxMarks" placeholder="Max Marks" required class="border px-4 py-2 rounded" />
                         <input type="text" name="subjects[0].remarks" placeholder="Remarks" class="border px-4 py-2 rounded" />
                         <input type="text" name="subjects[0].gradeGpa" placeholder="GPA (e.g. A+)" maxlength="2" required class="border px-4 py-2 rounded" />
+                        <p class="border text-white px-4 py-2 cursor-pointer rounded bg-red-600">Remove </p>
                       </div>
 
                       <!-- Subject 2 -->
-                      <div class="grid md:grid-cols-5 gap-4">
+                      <div class="grid md:grid-cols-6 gap-4" id="index-2" >
                         <input type="text" name="subjects[1].subject" placeholder="Subject Name" required class="border px-4 py-2 rounded" />
                         <input type="number" name="subjects[1].marks" placeholder="Marks" required class="border px-4 py-2 rounded" />
                         <input type="number" name="subjects[1].maxMarks" placeholder="Max Marks" required class="border px-4 py-2 rounded" />
                         <input type="text" name="subjects[1].remarks" placeholder="Remarks" class="border px-4 py-2 rounded" />
                         <input type="text" name="subjects[1].gradeGpa" placeholder="GPA (e.g. A+)" maxlength="2" required class="border px-4 py-2 rounded" />
+                        <p class="border px-4 py-2 rounded  cursor-pointer text-white bg-red-600">Remove </p>
                       </div>
 
 
@@ -80,7 +82,7 @@
           <!--            </div>-->
                     </div>
     <div>
-      <p onclick="addrow()" class="text-blue-600 px-3 inline rounded-2xl bg-gray-100 border border-blue-400 ">
+      <p onclick="addrow()" class="text-blue-600 cursor-pointer px-3 inline rounded-2xl bg-gray-100 border border-blue-400 ">
         Add
       </p>
     </div>
@@ -98,20 +100,37 @@
 
   function addrow(){
     console.log("Add Row")
-    container.innerHTML = container.innerHTML + `
-  <div class="grid md:grid-cols-5 gap-4">
-                        <input type="text" name="subjects[index].subject" placeholder="Subject Name" required class="border px-4 py-2 rounded" />
-                        <input type="number" name="subjects[index].marks" placeholder="Marks" required class="border px-4 py-2 rounded" />
-                        <input type="number" name="subjects[index].maxMarks" placeholder="Max Marks" required class="border px-4 py-2 rounded" />
-                        <input type="text" name="subjects[index].remarks" placeholder="Remarks" class="border px-4 py-2 rounded" />
-                        <input type="text" name="subjects[index].gradeGpa" placeholder="GPA (e.g. A+)" maxlength="2" required class="border px-4 py-2 rounded" />
+    // container.innerHTML = container.innerHTML+`
+  // <div class="grid md:grid-cols-6 gap-4" id="index-${index}">
+  //   <input type="text" name="subjects[${index}].subject" placeholder="Subject Name" required class="border px-4 py-2 rounded" />
+  //   <input type="number" name="subjects[${index}].marks" placeholder="Marks" required class="border px-4 py-2 rounded" />
+  //   <input type="number" name="subjects[${index}].maxMarks" placeholder="Max Marks" required class="border px-4 py-2 rounded" />
+  //   <input type="text" name="subjects[${index}].remarks" placeholder="Remarks" class="border px-4 py-2 rounded" />
+  //   <input type="text" name="subjects[${index}].gradeGpa" placeholder="GPA (e.g. A+)" maxlength="2" required class="border px-4 py-2 rounded" />
+  //   <p onclick="remove('index-${index}')" class="border cursor-pointer text-white px-4 py-2 rounded bg-red-600">Remove </p>
+  //                     </div>
+  //
+  // `
+
+    container.insertAdjacentHTML("beforeend", `
+  <div class="grid md:grid-cols-6 gap-4" id="index-${index}">
+    <input type="text" name="subjects[${index}].subject" placeholder="Subject Name" required class="border px-4 py-2 rounded" />
+    <input type="number" name="subjects[${index}].marks" placeholder="Marks" required class="border px-4 py-2 rounded" />
+    <input type="number" name="subjects[${index}].maxMarks" placeholder="Max Marks" required class="border px-4 py-2 rounded" />
+    <input type="text" name="subjects[${index}].remarks" placeholder="Remarks" class="border px-4 py-2 rounded" />
+    <input type="text" name="subjects[${index}].gradeGpa" placeholder="GPA (e.g. A+)" maxlength="2" required class="border px-4 py-2 rounded" />
+    <p onclick="remove('index-${index}')" class="border cursor-pointer text-white px-4 py-2 rounded bg-red-600">Remove </p>
                       </div>
 
-  `
-    index++;
+  `);
 
+    index+= index+1;
   }
 
+  function remove(id){
+   const dev = document.getElementById(id);
+   dev.remove();
+  }
 
 </script>
 

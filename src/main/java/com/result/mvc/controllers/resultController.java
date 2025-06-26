@@ -55,10 +55,12 @@ public class resultController {
 
        percentage =((double) marks /totalMarks)*100;
 
+        String formatted = String.format("%.2f", percentage);
+
         List numbers = new ArrayList<>();
         numbers.add(totalMarks);
         numbers.add(marks);
-        numbers.add(percentage);
+        numbers.add(formatted);
 
 
 
