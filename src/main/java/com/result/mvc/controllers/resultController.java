@@ -1,5 +1,6 @@
 package com.result.mvc.controllers;
 
+import com.result.mvc.entities.Marks;
 import com.result.mvc.entities.Student;
 import com.result.mvc.payload.FormStudent;
 import com.result.mvc.service.ResultService;
@@ -8,6 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.yaml.snakeyaml.error.Mark;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/result")
@@ -35,11 +40,30 @@ public class resultController {
     @RequestMapping(value = "/viewResult", method=RequestMethod.POST)
     public String viewResult(@RequestParam int rollNumber, Model model){
       Student studentMarks =  resultService.find((""+rollNumber).trim());
-      if(studentMarks==null){
-          return "notFound";
-      }
+        if(studentMarks==null){
+            return "notFound";
+        }
+
+      int marks =0;
+      int totalMarks =0;
+       double percentage=0;
+
+       for (Marks mark: studentMarks.getMarks()){
+           marks += mark.getMarks();
+           totalMarks+=mark.getMaxMarks();
+       }
+
+       percentage =((double) marks /totalMarks)*100;
+
+        List numbers = new ArrayList<>();
+        numbers.add(totalMarks);
+        numbers.add(marks);
+        numbers.add(percentage);
+
+
 
       model.addAttribute("studentMarks",studentMarks);
+      model.addAttribute("numbers",numbers);
         return "viewResult";
     }
 
